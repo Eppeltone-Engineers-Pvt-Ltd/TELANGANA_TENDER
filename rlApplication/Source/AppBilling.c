@@ -19,7 +19,11 @@
 //----------------dlms specific files---------------------------------
 #include "..\\..\\rlDlms\\meter_app\\r_dlms_data_meter.h"
 
+//extern uint8_t Tamper_status_AP[1];
 
+extern uint8_t NM_save,Rev_save,earth_save,CO_save,Mag_save;
+extern uint8_t NM_save_res,Rev_save_res,earth_save_res,CO_save_res,Mag_save_res;
+extern uint8_t status_temp;
 
 void CheckBillingOver(uint8_t resetType,uint32_t billdate)
 {   
@@ -27,6 +31,7 @@ void CheckBillingOver(uint8_t resetType,uint32_t billdate)
 	uint8_t avg_pf;
 	uint16_t loc;
 	uint8_t preSeason=0;
+	uint8_t RxTxBuffer_tamper[1];
 	
 
       
@@ -70,8 +75,13 @@ void CheckBillingOver(uint8_t resetType,uint32_t billdate)
 		makeByte(prevEnergy[0],31,4); //4 bytes Cum kWh
 		makeByte(prevEnergy[1],35,4); //4 bytes Cum kVAh
 	#endif
-	makeByte(TamperRecord.MonthTamperStatus,39,2);	//2 bytes tamper status
-			
+	
+	//read_eeprom((uint8_t *)&Data.long_data,TAMPER_STATUS_TEMP,1);
+ // status_temp=Data.byte[0];
+	makeByte(TamperRecord.Tamper_Once,39,1);	//1 byte //2 bytes tamper status
+		//makeByte(TamperRecord.TamperStatusFlag,39,2);	
+	//makeByte(0xFF,39,1);	//2 bytes tamper status		
+	makeByte(0,40,1);	//2 bytes tamper status		
 
 	loc=BILL_DATA_LOC+(InsSave.MDResetCount%HISTORY_RECORD)*BILLING_DATA_LENGTH;
 	write_eeprom(RxTxBuffer,loc,BILLING_DATA_LENGTH);  //update the billing kwh
@@ -90,6 +100,9 @@ void CheckBillingOver(uint8_t resetType,uint32_t billdate)
 	InsSave.BillMD.Current.kW_Date=0;
 	InsSave.BillMD.Current.kVA_Date=0;
 	InsSave.MonthPowerOnDuration=0;
+//	TamperRecord.Tamper_Once=0;	
+	TamperRecord.Tamper_Once=TamperRecord.bill_tamper_status;
+	
 	//--------------------------------------------------
 	preSeason=currentSeasonID;
 	currentSeasonID=getCurrentSeason(InsSave.timeCounter);
@@ -100,9 +113,9 @@ void CheckBillingOver(uint8_t resetType,uint32_t billdate)
 	
 			
 	R_OBIS_Class07_BillingUpdate();
-#if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))	
-	getlatestkWh_History();
-#endif	
+//#if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))	
+//	getlatestkWh_History();
+//#endif	
 }
 /*--------------------------------------------------------------------------*/
 
@@ -266,7 +279,7 @@ uint8_t getAutoBillDay(void)
 	return billday;
 	
 }
-
+#if 0
 #if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))
 void getlatestkWh_History(void)
 {
@@ -280,4 +293,5 @@ void getlatestkWh_History(void)
 	}
 	
 }
+#endif
 #endif

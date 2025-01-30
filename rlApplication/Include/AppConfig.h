@@ -62,7 +62,7 @@
 #define HARMONICS_LIMIT			3
 #define HARMONICS_WAIT_TIME		5
 #define ONE_SECOND_PULSE_VAL	112500UL
-#define IS_DC_MAG_ENABLE			(0)
+#define IS_DC_MAG_ENABLE			(1)
 
 #define CT_TYPE_KASHYAP				(0)
 #define CT_COMPENSATION_LS_LP		(1200)	//1.2A
@@ -78,20 +78,21 @@
 // meter utility
 //----------------------------------------------
 #define IRDA_TYPE_METER_HP			(1)
-#define IRDA_TYPE_METER_AP			(0)
-#define IRDA_TYPE_METER_AP_WARNGL	(0)
+#define IRDA_TYPE_METER_AP			(1)
+#define IRDA_TYPE_METER_AP_WARNGL	(1)
 #define BOARD_TARGET_MVVNL		(0)
 #define GUJRAT_METER_0			(0)
 #define IS_TARGET2_TENDER_0		(1)
 //----------------------------------------------
-#define IS_9600_BAUD			(1)
-#define IS_2400_BAUD			(0)
+#define IS_9600_BAUD			(0)
+#define IS_2400_BAUD			(1)
 
 
 #if (defined(IRDA_TYPE_METER_AP_WARNGL) && (IRDA_TYPE_METER_AP_WARNGL==1))
 #define IS_DISPLAY_KEPT_ON				(1)
 #define IS_DISPLAY_AUTO_SCROLL_ON		(1)
-#define BATTERY_LCD_DISPLAY_DURATION	(187200UL)
+//#define BATTERY_LCD_DISPLAY_DURATION	(187200UL)
+#define BATTERY_LCD_DISPLAY_DURATION	(172830UL)
 #define DISPLAY_PUSH_MODE2_HOLD_TIME	(10)
 #else
 #define IS_DISPLAY_KEPT_ON				(0)
@@ -127,14 +128,14 @@
 	
 	//------------------------------------------------------------
 	#if (defined(IS_TARGET2_TENDER_0) && (IS_TARGET2_TENDER_0==1))
-	#define IRDA_COM_ENABLE			(0)
-	#define UART_0_ENABLE			(1)
+	#define IRDA_COM_ENABLE			(1)
+	#define UART_0_ENABLE			(0)
 	#define UART_2_ENABLE			(1)
 	#define OLD_AVG_U_AVG_C_LOGIC	(0)
 	#define IS_DISPLAY_CONFIGURABLE	(1)	
 	#define IS_DLMS_ENABLED_EEPL	(0)
 	#define ISDO_HARMONICS_EEPL		(0)
-	#define APPLY_DC_IMMUNITY_ENABLE	(1)
+	#define APPLY_DC_IMMUNITY_ENABLE	(0)
 	#define ENABLE_CT_COMPENSATION		(1)
 	#define IS_LCD_OFF_AFTER_REL_20SECS	(0)
 	#define TENDER_MODE_NO_LOAD_TIME	(0)

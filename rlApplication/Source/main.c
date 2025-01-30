@@ -28,7 +28,7 @@
 //-------- include dlms specific files----------------
 #include "..\\..\\rlDlms\\DLMS_User.h"
 
-
+extern uint8_t NM_save_res,Rev_save_res,earth_save_res,CO_save_res,Mag_save_res;
 
 void prepareLowPower(void);
 
@@ -45,7 +45,8 @@ main(void)
 	ls_nm_start_loc=0xFFFF;
 	nm_ls_start_index=0xFFFF;
 	nm_ls_end_index=0;
-	
+	//earth_save_res=1;
+
 	
 	
 	

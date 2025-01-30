@@ -156,14 +156,14 @@ extern struct
 {
 	uint16_t 	TamperCount[MAX_TAMPER_COUNT];
 	uint8_t  	eventcounts[MAX_TAMPER_COUNT];
-	uint8_t		freebyte;
-	uint16_t	freebyte2;
+	uint8_t		bill_tamper_status;
+	uint8_t		Tamper_Once;
 	uint16_t 	sw_log_count;
-	uint16_t  	TamperStatusFlag	;
-	uint16_t 	lastEventAddr[MAX_TAMPER_COUNT];
-	uint16_t	lastOccRes[2];
-	uint16_t	MonthTamperStatus;
-	uint16_t 	crc;		
+	uint16_t  	TamperStatusFlag	; //33
+	uint16_t 	lastEventAddr[MAX_TAMPER_COUNT]; //51
+	uint16_t	lastOccRes[2]; //55
+	uint16_t	MonthTamperStatus; //57
+	uint16_t 	crc;		//59
 	
 }TamperRecord;	// (9*2+10+4+18+4+4)
 #elif (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 0))

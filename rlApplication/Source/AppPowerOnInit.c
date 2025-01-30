@@ -37,7 +37,7 @@ static uint32_t getTODEnergy(uint8_t EnergyType);
 static void UpdateEnergy(void);
 void production_prepareLowPower(uint8_t initRestoreValue);
 #if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))
-void getSerailforRam(void);
+//void getSerailforRam(void);
 #endif
 //------------------------------------------------------
 
@@ -176,6 +176,7 @@ void init_app_data(void)
 	}
 		
 	SaveEEPROM(PARA_READ_STATE,PARA_TYPE_TAMPER ); // load tamper data
+	TamperRecord.Tamper_Once=TamperRecord.bill_tamper_status;
 	
 	prevTimeCounter=InsSave.timeCounter;
 	
@@ -253,7 +254,7 @@ void init_app_data(void)
 	
 	
 	read_eeprom((uint8_t *)&ScheduleActionDateTime.BillDateTime,PRE_BILL_SINGLE_ACTION,4);	
-	
+//	read_eeprom((uint8_t *)&Data.long_data,TAMPER_STATUS_TEMP,1);	
 
 	//-----------------------------------
 	
@@ -274,8 +275,9 @@ void init_app_data(void)
 	read_eeprom((uint8_t *)&nmInfo,NM_INFO_SHT_LOC,12);
 	getSetPfailData(ENERGY_W_RAM);
 	#if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))
-		getSerailforRam();
+	//	getSerailforRam();
 	#endif	
+	 read_eeprom((uint8_t *)&Data.long_data,MAGNET_PERMANENT_SAVE,1);
 
 }
 
@@ -364,6 +366,7 @@ void CheckCurrentLimitNm(void)
 	}
 	
 }
+#if 0
 #if(defined(IRDA_TYPE_METER_AP) && (IRDA_TYPE_METER_AP == 1))
 void getSerailforRam(void)
 {
@@ -386,4 +389,5 @@ void getSerailforRam(void)
 	}
 	getlatestkWh_History();
 }
+#endif
 #endif

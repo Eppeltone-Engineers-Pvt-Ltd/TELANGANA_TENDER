@@ -1,6 +1,6 @@
 ****rlApplication\Source\AppTod.c
 v2 
-:1722590125
+:1738240470
 #1
 F "__DI" N I!1 T!2 ?18-2 
 T "void" KBV I!2 0x0 
@@ -109,12 +109,12 @@ F "memTest" F I!104 T!77 ?152-3
 F "GetZoneLoc" F I!105 T!80 ?5-5 P!106 
 V "" N I!106 O!105 T!77 .1 0x1 
 F "TodBilling" F I!107 T!2 #16-1 !17,31-1-1 ?6-5 
-F "getCurrentZoneNo" F I!108 T!77 #92-1 !93,124-1-1 ?7-5 86-1 P!394 
-F "GetTODBillLoc" F I!110 T!80 #127-1 !128,143-1-1 ?8-5 P!403 
-F "getMaxZoneNo" F I!112 T!77 #145-1 !146,154-1-1 ?9-5 101-1 P!406 
-F "GetTODLatestBillLoc" F I!114 T!80 #189-1 !190,200-1-1 ?10-5 P!415 
-F "getTODConsumption" F I!116 T!83 #168-1 !169,187-1-1 ?11-5 P!411 P!412 
-F "getCurrentSeason" F I!119 T!77 #34-1 !35,81-1-1 ?12-5 P!384 
+F "getCurrentZoneNo" F I!108 T!77 #92-1 !93,124-1-1 ?7-5 86-1 P!400 
+F "GetTODBillLoc" F I!110 T!80 #127-1 !128,143-1-1 ?8-5 P!409 
+F "getMaxZoneNo" F I!112 T!77 #145-1 !146,154-1-1 ?9-5 101-1 P!412 
+F "GetTODLatestBillLoc" F I!114 T!80 #189-1 !190,200-1-1 ?10-5 P!421 
+F "getTODConsumption" F I!116 T!83 #168-1 !169,187-1-1 ?11-5 P!417 P!418 
+F "getCurrentSeason" F I!119 T!77 #34-1 !35,81-1-1 ?12-5 P!390 
 F "getMaxSeasonNo" F I!121 T!77 #156-1 !157,166-1-1 ?13-5 63-1 
 V "ramCHECK1" GN I!122 T!77 ?16-6 .1 0x1 
 V "activePulsePower" GN I!123 T!83 ?17-6 .2 0x4 
@@ -176,278 +176,284 @@ V "ramCHECK5" GN I!178 T!77 ?52-6 .1 0x1
 V "harChU" GN I!179 T!77 ?53-6 .1 0x1 
 V "harChI" GN I!180 T!77 ?53-6 .1 0x1 
 V "har_wait_time" GN I!181 T!77 ?53-6 .1 0x1 
-T "" KS I!182 !62-6 0x24 VM!183 VM!184 VM!185 VM!186 VM!187 VM!188 VM!189 VM!190 VM!191 VM!192 VM!193 
-V "Voltage" - I!183 O!182 T!80 !64-6 .2 0x2 BO0 BIS16 
-V "PowerFactor" - I!184 O!182 T!77 !65-6 .1 0x1 BO16 BIS8 
-V "LeadLag" - I!185 O!182 T!77 !66-6 .1 0x1 BO24 BIS8 
-V "PhCurrent" - I!186 O!182 T!83 !67-6 .2 0x4 BO32 BIS32 
-V "NeuCurrent" - I!187 O!182 T!83 !68-6 .2 0x4 BO64 BIS32 
-V "PhPower" - I!188 O!182 T!83 !69-6 .2 0x4 BO96 BIS32 
-V "NeuPower" - I!189 O!182 T!83 !70-6 .2 0x4 BO128 BIS32 
-V "AppPower" - I!190 O!182 T!83 !71-6 .2 0x4 BO160 BIS32 
-V "Frequency" - I!191 O!182 T!83 !72-6 .2 0x4 BO192 BIS32 
-V "EffectiveI" - I!192 O!182 T!83 !73-6 .2 0x4 BO224 BIS32 
-V "EffectiveP" - I!193 O!182 T!83 !74-6 .2 0x4 BO256 BIS32 
-V "Ins" GN I!194 T!182 ?76-6 .2 0x24 
-T "MD" KS I!195 !78-6 0xc VM!196 VM!197 VM!198 VM!199 
-V "kW" - I!196 O!195 T!80 !80-6 #26-1 22-1 .2 0x2 BO0 BIS16 
-V "kVA" - I!197 O!195 T!80 !81-6 #28-1 .2 0x2 BO16 BIS16 
-V "kW_Date" - I!198 O!195 T!83 !82-6 #27-1 .2 0x4 BO32 BIS32 
-V "kVA_Date" - I!199 O!195 T!83 !83-6 #29-1 .2 0x4 BO64 BIS32 
-T "billMD" KS I!200 !87-6 0x14 VM!201 VM!202 VM!203 
-V "CumkWMD" - I!201 O!200 T!83 !89-6 .2 0x4 BO0 BIS32 
-V "CumkVAMD" - I!202 O!200 T!83 !90-6 .2 0x4 BO32 BIS32 
-V "Current" - I!203 O!200 T!195 !92-6 .2 0xc BO64 BIS96 
-T "TOD" KS I!204 !97-6 0x14 VM!205 VM!206 VM!207 
-V "TODMD" - I!205 O!204 T!195 !99-6 #26-1 #27-1 #28-1 #29-1 22-1 .2 0xc BO0 BIS96 
-V "kWh" - I!206 O!204 T!83 !100-6 173-1 .2 0x4 BO96 BIS32 
-V "kVAh" - I!207 O!204 T!83 !101-6 175-1 .2 0x4 BO128 BIS32 
-T "TOD_8" KS I!208 !104-6 0xa0 VM!209 
-V "TOD" - I!209 O!208 T!210 !106-6 #26-1 #27-1 #28-1 #29-1 22-1 173-1 175-1 .2 0xa0 BO0 BIS1280 
-T "" KA8 I!210 T!204 0xa0 
-T "" KS I!211 !110-6 0xfa VM!212 VM!213 VM!214 VM!215 VM!216 VM!217 VM!218 VM!219 VM!220 VM!221 VM!222 VM!223 VM!224 VM!225 VM!226 VM!227 VM!228 VM!229 VM!230 VM!231 VM!232 VM!233 VM!234 VM!235 VM!236 VM!237 VM!238 VM!239 
-V "CumkWh" - I!212 O!211 T!83 !111-6 .2 0x4 BO0 BIS32 
-V "CumkVAh" - I!213 O!211 T!83 !112-6 .2 0x4 BO32 BIS32 
-V "BillMD" - I!214 O!211 T!200 !113-6 .2 0x14 BO64 BIS160 
-V "TODEnergy" - I!215 O!211 T!208 !114-6 #26-1 #27-1 #28-1 #29-1 22-1 173-1 175-1 .2 0xa0 BO224 BIS1280 
-V "MonthPowerOnDuration" - I!216 O!211 T!83 !115-6 .2 0x4 BO1504 BIS32 
-V "CumPowerOnDuration" - I!217 O!211 T!83 !116-6 .2 0x4 BO1536 BIS32 
-V "DayCount" - I!218 O!211 T!80 !117-6 .2 0x2 BO1568 BIS16 
-V "DailyDayCount" - I!219 O!211 T!80 !118-6 .2 0x2 BO1584 BIS16 
-V "PFailCount" - I!220 O!211 T!80 !119-6 .2 0x2 BO1600 BIS16 
-V "MDResetCount" - I!221 O!211 T!77 !120-6 21-1 132-1 133-1 193-1 .1 0x1 BO1616 BIS8 
-V "IntCount" - I!222 O!211 T!77 !121-6 .1 0x1 BO1624 BIS8 
-V "ExpCumkWh" - I!223 O!211 T!83 !122-6 .2 0x4 BO1632 BIS32 
-V "ExpCumkVAh" - I!224 O!211 T!83 !123-6 .2 0x4 BO1664 BIS32 
-V "NonSolarCumkWh" - I!225 O!211 T!83 !124-6 .2 0x4 BO1696 BIS32 
-V "timeCounter" - I!226 O!211 T!83 !125-6 41-1 .2 0x4 BO1728 BIS32 
-V "lsAvgV" - I!227 O!211 T!83 !126-6 .2 0x4 BO1760 BIS32 
-V "lsAvgC" - I!228 O!211 T!83 !127-6 .2 0x4 BO1792 BIS32 
-V "kWhCounter" - I!229 O!211 T!80 !128-6 .2 0x2 BO1824 BIS16 
-V "kVAhCounter" - I!230 O!211 T!80 !129-6 .2 0x2 BO1840 BIS16 
-V "kWhCounterMD" - I!231 O!211 T!80 !130-6 .2 0x2 BO1856 BIS16 
-V "kVAhCounterMD" - I!232 O!211 T!80 !131-6 .2 0x2 BO1872 BIS16 
-V "ZkWhCounter" - I!233 O!211 T!80 !132-6 180-1 .2 0x2 BO1888 BIS16 
-V "ZkVAhCounter" - I!234 O!211 T!80 !133-6 182-1 .2 0x2 BO1904 BIS16 
-V "ExpZkWhCounter" - I!235 O!211 T!80 !134-6 .2 0x2 BO1920 BIS16 
-V "ExpZkVAhCounter" - I!236 O!211 T!80 !135-6 .2 0x2 BO1936 BIS16 
-V "ExpkWhCounter" - I!237 O!211 T!80 !136-6 .2 0x2 BO1952 BIS16 
-V "PowerOn30" - I!238 O!211 T!80 !137-6 .2 0x2 BO1968 BIS16 
-V "crc2" - I!239 O!211 T!80 !138-6 .2 0x2 BO1984 BIS16 
-V "InsSave" GN I!240 T!211 ?140-6 #26-1 #27-1 #28-1 #29-1 21-1 22-1 41-1 132-1 133-1 173-1 175-1 180-1 182-1 193-1 .2 0xfa 
-T "" KU I!241 !144-6 0x4 VM!242 VM!246 VM!247 
-V "long_data" - I!242 O!241 T!83 !145-6 .2 0x4 BO0 BIS32 
-T "" KS I!243 !147-6 0x4 VM!244 VM!245 
-V "lsb" - I!244 O!243 T!80 !148-6 .2 0x2 BO0 BIS16 
-V "msb" - I!245 O!243 T!80 !149-6 .2 0x2 BO16 BIS16 
-V "Short" - I!246 O!241 T!243 !150-6 .2 0x4 BO0 BIS32 
-V "byte" - I!247 O!241 T!248 !151-6 .1 0x4 BO0 BIS32 
-T "" KA4 I!248 T!77 0x4 
-V "Data" GN I!249 T!241 ?152-6 .2 0x4 
-T "" KS I!250 !156-6 0x3c VM!251 VM!253 VM!255 VM!256 VM!257 VM!258 VM!259 VM!261 VM!263 VM!264 
-V "TamperCount" - I!251 O!250 T!252 !157-6 .2 0x12 BO0 BIS144 
-T "" KA9 I!252 T!80 0x12 
-V "eventcounts" - I!253 O!250 T!254 !158-6 .1 0x9 BO144 BIS72 
-T "" KA9 I!254 T!77 0x9 
-V "freebyte" - I!255 O!250 T!77 !159-6 .1 0x1 BO216 BIS8 
-V "freebyte2" - I!256 O!250 T!80 !160-6 .2 0x2 BO224 BIS16 
-V "sw_log_count" - I!257 O!250 T!80 !161-6 .2 0x2 BO240 BIS16 
-V "TamperStatusFlag" - I!258 O!250 T!80 !162-6 .2 0x2 BO256 BIS16 
-V "lastEventAddr" - I!259 O!250 T!260 !163-6 .2 0x12 BO272 BIS144 
-T "" KA9 I!260 T!80 0x12 
-V "lastOccRes" - I!261 O!250 T!262 !164-6 .2 0x4 BO416 BIS32 
-T "" KA2 I!262 T!80 0x4 
-V "MonthTamperStatus" - I!263 O!250 T!80 !165-6 .2 0x2 BO448 BIS16 
-V "crc" - I!264 O!250 T!80 !166-6 .2 0x2 BO464 BIS16 
-V "TamperRecord" GN I!265 T!250 ?168-6 .2 0x3c 
-T "" KS I!266 !189-6 0x8 VM!267 VM!268 VM!269 VM!270 VM!271 VM!272 VM!273 VM!274 
-V "sec" - I!267 O!266 T!77 !190-6 #46-1 #57-1 .1 0x1 BO0 BIS8 
-V "min" - I!268 O!266 T!77 !191-6 #47-1 #58-1 .1 0x1 BO8 BIS8 
-V "hour" - I!269 O!266 T!77 !192-6 #48-1 #59-1 .1 0x1 BO16 BIS8 
-V "day" - I!270 O!266 T!77 !193-6 #44-1 #54-1 .1 0x1 BO24 BIS8 
-V "week" - I!271 O!266 T!77 !194-6 .1 0x1 BO32 BIS8 
-V "month" - I!272 O!266 T!77 !195-6 #45-1 #55-1 .1 0x1 BO40 BIS8 
-V "year" - I!273 O!266 T!77 !196-6 .1 0x1 BO48 BIS8 
-V "reserve" - I!274 O!266 T!77 !197-6 .1 0x1 BO56 BIS8 
-T "Apprtc" KT I!275 T!266 !198-6 0x8 
-T "" KS I!276 !203-6 0x8 VM!277 VM!278 
-V "CalanderDateTime" - I!277 O!276 T!83 !204-6 .2 0x4 BO0 BIS32 
-V "BillDateTime" - I!278 O!276 T!83 !205-6 .2 0x4 BO32 BIS32 
-V "ScheduleActionDateTime" GN I!279 T!276 ?207-6 .2 0x8 
-F "lcd_init" F I!280 T!2 ?18-10 
-F "Display" F I!281 T!2 ?19-10 P!282 
-V "" N I!282 O!281 T!77 .1 0x1 
-F "PushButton" F I!283 T!2 ?20-10 
-F "setParaBuff" F I!284 T!2 ?21-10 P!285 
-V "" N I!285 O!284 T!77 .1 0x1 
-F "setNextParaSeq" F I!286 T!2 ?22-10 
-F "CheckParaTimeOut" F I!287 T!2 ?23-10 
-F "setParamIndex" F I!288 T!2 ?24-10 P!289 P!290 
-V "" N I!289 O!288 T!77 .1 0x1 
-V "" N I!290 O!288 T!77 .1 0x1 
-F "Clear_Lcd" F I!291 T!2 ?25-10 
-F "MessageTimeOut" F I!292 T!2 ?26-10 
-F "getParaCount" F I!293 T!77 ?27-10 
-F "getParamTime" F I!294 T!77 ?28-10 
-F "getMeterSerial" F I!295 T!77 ?29-10 P!296 P!297 
-V "" N I!296 O!295 T!101 .2 0x2 
-V "" N I!297 O!295 T!77 .1 0x1 
-F "getMeterKitID" F I!298 T!77 ?30-10 P!299 P!300 
-V "" N I!299 O!298 T!101 .2 0x2 
-V "" N I!300 O!298 T!77 .1 0x1 
-F "moveback" F I!301 T!2 ?32-10 
-F "copyDPfromFlash2Ram" F I!302 T!2 ?33-10 P!303 
-V "" N I!303 O!302 T!77 .1 0x1 
-F "getConfiguredDP" F I!304 T!2 ?34-10 P!305 
-V "" N I!305 O!304 T!77 .1 0x1 
-F "configDisplayPara" F I!306 T!77 ?35-10 P!307 
-V "" N I!307 O!306 T!96 .2 0x2 
-F "readConfiguredDP2Send" F I!308 T!77 ?36-10 P!309 P!310 
-V "" N I!309 O!308 T!101 .2 0x2 
-V "" N I!310 O!308 T!77 .1 0x1 
-F "ResetConfigDP" F I!311 T!2 ?37-10 
-F "validatelcdRAMBuff" F I!312 T!2 ?38-10 
-F "Compute_MD" F I!313 T!2 ?5-11 P!314 
-V "" N I!314 O!313 T!77 .1 0x1 
-F "GetMdLoc" F I!315 T!80 ?6-11 P!316 
-V "" N I!316 O!315 T!77 .1 0x1 
-F "doManBillDue2SeasonChange" F I!317 T!77 ?7-11 
-F "ConvertTimeCounterToTime" F I!318 T!83 ?10-12 41-1 P!319 P!320 P!321 
-V "" N I!319 O!318 T!83 .2 0x4 
-V "" N I!320 O!318 T!77 .1 0x1 
-V "" N I!321 O!318 T!322 .2 0x2 
-T "" KP I!322 T!275 0x2 
-F "ConvertTimeToTimeCounter" F I!323 T!83 ?11-12 50-1 61-1 P!324 
-V "" N I!324 O!323 T!322 .2 0x2 
-F "Crc_Cal" F I!325 T!80 ?12-12 P!326 P!327 
-V "" N I!326 O!325 T!96 .2 0x2 
-V "" N I!327 O!325 T!77 .1 0x1 
-F "Crc_Cal_Advanced" F I!328 T!80 ?13-12 P!329 P!330 P!331 
-V "" N I!329 O!328 T!96 .2 0x2 
-V "" N I!330 O!328 T!77 .1 0x1 
-V "" N I!331 O!328 T!80 .2 0x2 
-F "makeByte" F I!332 T!2 ?14-12 P!333 P!334 P!335 
-V "" N I!333 O!332 T!83 .2 0x4 
-V "" N I!334 O!332 T!77 .1 0x1 
-V "" N I!335 O!332 T!77 .1 0x1 
-F "getByteValue" F I!336 T!83 ?15-12 P!337 P!338 P!339 
-V "" N I!337 O!336 T!96 .2 0x2 
-V "" N I!338 O!336 T!77 .1 0x1 
-V "" N I!339 O!336 T!77 .1 0x1 
-F "SaveEEPROM" F I!340 T!2 ?16-12 P!341 P!342 
-V "" N I!341 O!340 T!77 .1 0x1 
-V "" N I!342 O!340 T!77 .1 0x1 
-F "powerfailLogging" F I!343 T!2 ?17-12 
-F "isRAMOK" F I!344 T!2 ?18-12 
-F "updateMDInterval" F I!345 T!80 ?19-12 P!346 P!347 
-V "" N I!346 O!345 T!77 .1 0x1 
-V "" N I!347 O!345 T!80 .2 0x2 
-F "isPowerfailLog" F I!348 T!77 ?20-12 P!349 
-V "" N I!349 O!348 T!77 .1 0x1 
-F "getSetPfailData" F I!350 T!77 ?21-12 P!351 
-V "" N I!351 O!350 T!77 .1 0x1 
-F "fillComBufferZero" F I!352 T!2 ?22-12 
-F "getSelftDgFeature" F I!353 T!77 ?23-12 
-F "Dec_Ascii" F I!354 T!2 ?24-12 P!355 P!356 P!357 P!358 
-V "" N I!355 O!354 T!83 .2 0x4 
-V "" N I!356 O!354 T!77 .1 0x1 
-V "" N I!357 O!354 T!101 .2 0x2 
-V "" N I!358 O!354 T!77 .1 0x1 
-F "getCustomDateTimeASCIIFormat" F I!359 T!77 ?25-12 P!360 P!361 P!362 
-V "" N I!360 O!359 T!83 .2 0x4 
-V "" N I!361 O!359 T!101 .2 0x2 
-V "" N I!362 O!359 T!77 .1 0x1 
-F "CheckBillingOver" F I!363 T!2 ?5-13 P!364 P!365 
-V "" N I!364 O!363 T!77 .1 0x1 
-V "" N I!365 O!363 T!83 .2 0x4 
-F "GetBillLoc" F I!366 T!80 ?6-13 P!367 
-V "" N I!367 O!366 T!77 .1 0x1 
-F "GetLastBillLoc" F I!368 T!80 ?7-13 P!369 
-V "" N I!369 O!368 T!77 .1 0x1 
-F "ClearMD" F I!370 T!2 ?8-13 
-F "doBilling" F I!371 T!2 ?9-13 
-F "getLastBillnumber" F I!372 T!77 ?10-13 
-F "getAvgPf" F I!373 T!77 ?11-13 
-F "initPowerOnDuration" F I!374 T!2 ?12-13 
-F "getNextBillingDate" F I!375 T!83 ?13-13 
-F "GetPastMD" F I!376 T!83 ?14-13 P!377 P!378 
-V "" N I!377 O!376 T!77 .1 0x1 
-V "" N I!378 O!376 T!77 .1 0x1 
-F "getAutoBillDay" F I!379 T!77 ?15-13 44-1 54-1 
-F "getlatestkWh_History" F I!380 T!2 ?16-13 
-V "i" N I!381 O!107 T!77 !18-1 #24-1 #24-1 24-1 24-1 26-1 27-1 28-1 29-1 .1 0x1 
-V "billloc" N I!382 O!107 T!80 !19-1 #21-1 22-1 .2 0x2 
-V "timeZoneCounter" N I!384 O!119 T!83 !34-1 66-1 69-1 .2 0x4 
-V "newseason" N I!385 O!119 T!77 !36-1 #36-1 #65-1 #75-1 #77-1 43-1 45-1 52-1 55-1 67-1 70-1 77-1 79-1 .1 0x1 
-V "seasonStartTime1" N I!386 O!119 T!83 !37-1 #37-1 #50-1 66-1 .2 0x4 
-V "seasonStartTime2" N I!387 O!119 T!83 !38-1 #38-1 #61-1 69-1 .2 0x4 
-V "rtc" N I!388 O!119 T!275 !39-1 #44-1 #45-1 #46-1 #47-1 #48-1 #54-1 #55-1 #57-1 #58-1 #59-1 41-1 50-1 61-1 .1 0x8 
-F "isZoneChanged" F I!389 T!77 #83-1 !84,91-1-1 P!391 
-V "timeZoneCounter" N I!391 O!389 T!83 !83-1 86-1 .2 0x4 
-V "newZoneId" N I!392 O!389 T!77 !85-1 #86-1 87-1 .1 0x1 
-V "timeZoneCounter" N I!394 O!108 T!83 !92-1 98-1 .2 0x4 
-V "EEPROMZoneTime" N I!395 O!108 T!396 !94-1 100-1 106-1 107-1 .2 0x10 
-T "" KA8 I!396 T!80 0x10 
-V "ZoneTime" N I!397 O!108 T!398 !95-1 #102-1 #103-1 #106-1 #107-1 #110-1 #111-1 #112-1 108-1 108-1 110-1 114-1 114-1 114-1 114-1 .2 0x8 
-T "" KA4 I!398 T!80 0x8 
-V "dayCounter" N I!399 O!108 T!80 !95-1 #98-1 114-1 114-1 114-1 114-1 .2 0x2 
-V "ZoneNo" N I!400 O!108 T!77 !96-1 #104-1 #104-1 #122-1 104-1 104-1 106-1 107-1 118-1 118-1 120-1 120-1 122-1 123-1 .1 0x1 
-V "MaxZoneNo" N I!401 O!108 T!77 !96-1 #101-1 104-1 .1 0x1 
-V "eventno" N I!403 O!110 T!77 !127-1 137-1 .1 0x1 
-V "addr" N I!404 O!110 T!80 !130-1 #133-1 #135-1 #137-1 #138-1 #140-1 137-1 138-1 140-1 142-1 .2 0x2 
-V "seasonNO" N I!406 O!112 T!77 !145-1 148-1 .1 0x1 
-V "MaxZoneNo" N I!407 O!112 T!77 !147-1 #147-1 #151-1 148-1 150-1 153-1 .1 0x1 
-V "MaxSeasonNo" N I!408 O!121 T!77 !158-1 #158-1 #163-1 160-1 162-1 165-1 .1 0x1 
-V "zoneNo" N I!411 O!116 T!77 !168-1 173-1 175-1 177-1 .1 0x1 
-V "EnergyType" N I!412 O!116 T!77 !168-1 172-1 179-1 .1 0x1 
-V "curEnergy" N I!413 O!116 T!83 !170-1 #170-1 #173-1 #175-1 #180-1 #182-1 180-1 182-1 186-1 .2 0x4 
-V "eventno" N I!415 O!114 T!77 !189-1 193-1 .1 0x1 
-V "addr" N I!416 O!114 T!78 !191-1 #193-1 #195-1 #197-1 #198-1 194-1 195-1 197-1 198-1 199-1 .2 0x2 
+V "gblserialnumberLCD" GN I!182 T!183 ?55-6 .1 0x8 
+T "" KA8 I!183 T!77 0x8 
+V "kWh_History" GN I!184 T!185 ?56-6 .2 0x18 
+T "" KA6 I!185 T!83 0x18 
+V "kW_MD_History" GN I!186 T!187 ?56-6 .2 0x18 
+T "" KA6 I!187 T!83 0x18 
+T "" KS I!188 !62-6 0x24 VM!189 VM!190 VM!191 VM!192 VM!193 VM!194 VM!195 VM!196 VM!197 VM!198 VM!199 
+V "Voltage" - I!189 O!188 T!80 !64-6 .2 0x2 BO0 BIS16 
+V "PowerFactor" - I!190 O!188 T!77 !65-6 .1 0x1 BO16 BIS8 
+V "LeadLag" - I!191 O!188 T!77 !66-6 .1 0x1 BO24 BIS8 
+V "PhCurrent" - I!192 O!188 T!83 !67-6 .2 0x4 BO32 BIS32 
+V "NeuCurrent" - I!193 O!188 T!83 !68-6 .2 0x4 BO64 BIS32 
+V "PhPower" - I!194 O!188 T!83 !69-6 .2 0x4 BO96 BIS32 
+V "NeuPower" - I!195 O!188 T!83 !70-6 .2 0x4 BO128 BIS32 
+V "AppPower" - I!196 O!188 T!83 !71-6 .2 0x4 BO160 BIS32 
+V "Frequency" - I!197 O!188 T!83 !72-6 .2 0x4 BO192 BIS32 
+V "EffectiveI" - I!198 O!188 T!83 !73-6 .2 0x4 BO224 BIS32 
+V "EffectiveP" - I!199 O!188 T!83 !74-6 .2 0x4 BO256 BIS32 
+V "Ins" GN I!200 T!188 ?76-6 .2 0x24 
+T "MD" KS I!201 !78-6 0xc VM!202 VM!203 VM!204 VM!205 
+V "kW" - I!202 O!201 T!80 !80-6 #26-1 22-1 .2 0x2 BO0 BIS16 
+V "kVA" - I!203 O!201 T!80 !81-6 #28-1 .2 0x2 BO16 BIS16 
+V "kW_Date" - I!204 O!201 T!83 !82-6 #27-1 .2 0x4 BO32 BIS32 
+V "kVA_Date" - I!205 O!201 T!83 !83-6 #29-1 .2 0x4 BO64 BIS32 
+T "billMD" KS I!206 !87-6 0x14 VM!207 VM!208 VM!209 
+V "CumkWMD" - I!207 O!206 T!83 !89-6 .2 0x4 BO0 BIS32 
+V "CumkVAMD" - I!208 O!206 T!83 !90-6 .2 0x4 BO32 BIS32 
+V "Current" - I!209 O!206 T!201 !92-6 .2 0xc BO64 BIS96 
+T "TOD" KS I!210 !97-6 0x14 VM!211 VM!212 VM!213 
+V "TODMD" - I!211 O!210 T!201 !99-6 #26-1 #27-1 #28-1 #29-1 22-1 .2 0xc BO0 BIS96 
+V "kWh" - I!212 O!210 T!83 !100-6 173-1 .2 0x4 BO96 BIS32 
+V "kVAh" - I!213 O!210 T!83 !101-6 175-1 .2 0x4 BO128 BIS32 
+T "TOD_8" KS I!214 !104-6 0xa0 VM!215 
+V "TOD" - I!215 O!214 T!216 !106-6 #26-1 #27-1 #28-1 #29-1 22-1 173-1 175-1 .2 0xa0 BO0 BIS1280 
+T "" KA8 I!216 T!210 0xa0 
+T "" KS I!217 !110-6 0xfa VM!218 VM!219 VM!220 VM!221 VM!222 VM!223 VM!224 VM!225 VM!226 VM!227 VM!228 VM!229 VM!230 VM!231 VM!232 VM!233 VM!234 VM!235 VM!236 VM!237 VM!238 VM!239 VM!240 VM!241 VM!242 VM!243 VM!244 VM!245 
+V "CumkWh" - I!218 O!217 T!83 !111-6 .2 0x4 BO0 BIS32 
+V "CumkVAh" - I!219 O!217 T!83 !112-6 .2 0x4 BO32 BIS32 
+V "BillMD" - I!220 O!217 T!206 !113-6 .2 0x14 BO64 BIS160 
+V "TODEnergy" - I!221 O!217 T!214 !114-6 #26-1 #27-1 #28-1 #29-1 22-1 173-1 175-1 .2 0xa0 BO224 BIS1280 
+V "MonthPowerOnDuration" - I!222 O!217 T!83 !115-6 .2 0x4 BO1504 BIS32 
+V "CumPowerOnDuration" - I!223 O!217 T!83 !116-6 .2 0x4 BO1536 BIS32 
+V "DayCount" - I!224 O!217 T!80 !117-6 .2 0x2 BO1568 BIS16 
+V "DailyDayCount" - I!225 O!217 T!80 !118-6 .2 0x2 BO1584 BIS16 
+V "PFailCount" - I!226 O!217 T!80 !119-6 .2 0x2 BO1600 BIS16 
+V "MDResetCount" - I!227 O!217 T!77 !120-6 21-1 132-1 133-1 193-1 .1 0x1 BO1616 BIS8 
+V "IntCount" - I!228 O!217 T!77 !121-6 .1 0x1 BO1624 BIS8 
+V "ExpCumkWh" - I!229 O!217 T!83 !122-6 .2 0x4 BO1632 BIS32 
+V "ExpCumkVAh" - I!230 O!217 T!83 !123-6 .2 0x4 BO1664 BIS32 
+V "NonSolarCumkWh" - I!231 O!217 T!83 !124-6 .2 0x4 BO1696 BIS32 
+V "timeCounter" - I!232 O!217 T!83 !125-6 41-1 .2 0x4 BO1728 BIS32 
+V "lsAvgV" - I!233 O!217 T!83 !126-6 .2 0x4 BO1760 BIS32 
+V "lsAvgC" - I!234 O!217 T!83 !127-6 .2 0x4 BO1792 BIS32 
+V "kWhCounter" - I!235 O!217 T!80 !128-6 .2 0x2 BO1824 BIS16 
+V "kVAhCounter" - I!236 O!217 T!80 !129-6 .2 0x2 BO1840 BIS16 
+V "kWhCounterMD" - I!237 O!217 T!80 !130-6 .2 0x2 BO1856 BIS16 
+V "kVAhCounterMD" - I!238 O!217 T!80 !131-6 .2 0x2 BO1872 BIS16 
+V "ZkWhCounter" - I!239 O!217 T!80 !132-6 180-1 .2 0x2 BO1888 BIS16 
+V "ZkVAhCounter" - I!240 O!217 T!80 !133-6 182-1 .2 0x2 BO1904 BIS16 
+V "ExpZkWhCounter" - I!241 O!217 T!80 !134-6 .2 0x2 BO1920 BIS16 
+V "ExpZkVAhCounter" - I!242 O!217 T!80 !135-6 .2 0x2 BO1936 BIS16 
+V "ExpkWhCounter" - I!243 O!217 T!80 !136-6 .2 0x2 BO1952 BIS16 
+V "PowerOn30" - I!244 O!217 T!80 !137-6 .2 0x2 BO1968 BIS16 
+V "crc2" - I!245 O!217 T!80 !138-6 .2 0x2 BO1984 BIS16 
+V "InsSave" GN I!246 T!217 ?140-6 #26-1 #27-1 #28-1 #29-1 21-1 22-1 41-1 132-1 133-1 173-1 175-1 180-1 182-1 193-1 .2 0xfa 
+T "" KU I!247 !144-6 0x4 VM!248 VM!252 VM!253 
+V "long_data" - I!248 O!247 T!83 !145-6 .2 0x4 BO0 BIS32 
+T "" KS I!249 !147-6 0x4 VM!250 VM!251 
+V "lsb" - I!250 O!249 T!80 !148-6 .2 0x2 BO0 BIS16 
+V "msb" - I!251 O!249 T!80 !149-6 .2 0x2 BO16 BIS16 
+V "Short" - I!252 O!247 T!249 !150-6 .2 0x4 BO0 BIS32 
+V "byte" - I!253 O!247 T!254 !151-6 .1 0x4 BO0 BIS32 
+T "" KA4 I!254 T!77 0x4 
+V "Data" GN I!255 T!247 ?152-6 .2 0x4 
+T "" KS I!256 !156-6 0x3c VM!257 VM!259 VM!261 VM!262 VM!263 VM!264 VM!265 VM!267 VM!269 VM!270 
+V "TamperCount" - I!257 O!256 T!258 !157-6 .2 0x12 BO0 BIS144 
+T "" KA9 I!258 T!80 0x12 
+V "eventcounts" - I!259 O!256 T!260 !158-6 .1 0x9 BO144 BIS72 
+T "" KA9 I!260 T!77 0x9 
+V "bill_tamper_status" - I!261 O!256 T!77 !159-6 .1 0x1 BO216 BIS8 
+V "Tamper_Once" - I!262 O!256 T!77 !160-6 .1 0x1 BO224 BIS8 
+V "sw_log_count" - I!263 O!256 T!80 !161-6 .2 0x2 BO240 BIS16 
+V "TamperStatusFlag" - I!264 O!256 T!80 !162-6 .2 0x2 BO256 BIS16 
+V "lastEventAddr" - I!265 O!256 T!266 !163-6 .2 0x12 BO272 BIS144 
+T "" KA9 I!266 T!80 0x12 
+V "lastOccRes" - I!267 O!256 T!268 !164-6 .2 0x4 BO416 BIS32 
+T "" KA2 I!268 T!80 0x4 
+V "MonthTamperStatus" - I!269 O!256 T!80 !165-6 .2 0x2 BO448 BIS16 
+V "crc" - I!270 O!256 T!80 !166-6 .2 0x2 BO464 BIS16 
+V "TamperRecord" GN I!271 T!256 ?168-6 .2 0x3c 
+T "" KS I!272 !189-6 0x8 VM!273 VM!274 VM!275 VM!276 VM!277 VM!278 VM!279 VM!280 
+V "sec" - I!273 O!272 T!77 !190-6 #46-1 #57-1 .1 0x1 BO0 BIS8 
+V "min" - I!274 O!272 T!77 !191-6 #47-1 #58-1 .1 0x1 BO8 BIS8 
+V "hour" - I!275 O!272 T!77 !192-6 #48-1 #59-1 .1 0x1 BO16 BIS8 
+V "day" - I!276 O!272 T!77 !193-6 #44-1 #54-1 .1 0x1 BO24 BIS8 
+V "week" - I!277 O!272 T!77 !194-6 .1 0x1 BO32 BIS8 
+V "month" - I!278 O!272 T!77 !195-6 #45-1 #55-1 .1 0x1 BO40 BIS8 
+V "year" - I!279 O!272 T!77 !196-6 .1 0x1 BO48 BIS8 
+V "reserve" - I!280 O!272 T!77 !197-6 .1 0x1 BO56 BIS8 
+T "Apprtc" KT I!281 T!272 !198-6 0x8 
+T "" KS I!282 !203-6 0x8 VM!283 VM!284 
+V "CalanderDateTime" - I!283 O!282 T!83 !204-6 .2 0x4 BO0 BIS32 
+V "BillDateTime" - I!284 O!282 T!83 !205-6 .2 0x4 BO32 BIS32 
+V "ScheduleActionDateTime" GN I!285 T!282 ?207-6 .2 0x8 
+F "lcd_init" F I!286 T!2 ?18-10 
+F "Display" F I!287 T!2 ?19-10 P!288 
+V "" N I!288 O!287 T!77 .1 0x1 
+F "PushButton" F I!289 T!2 ?20-10 
+F "setParaBuff" F I!290 T!2 ?21-10 P!291 
+V "" N I!291 O!290 T!77 .1 0x1 
+F "setNextParaSeq" F I!292 T!2 ?22-10 
+F "CheckParaTimeOut" F I!293 T!2 ?23-10 
+F "setParamIndex" F I!294 T!2 ?24-10 P!295 P!296 
+V "" N I!295 O!294 T!77 .1 0x1 
+V "" N I!296 O!294 T!77 .1 0x1 
+F "Clear_Lcd" F I!297 T!2 ?25-10 
+F "MessageTimeOut" F I!298 T!2 ?26-10 
+F "getParaCount" F I!299 T!77 ?27-10 
+F "getParamTime" F I!300 T!77 ?28-10 
+F "getMeterSerial" F I!301 T!77 ?29-10 P!302 P!303 
+V "" N I!302 O!301 T!101 .2 0x2 
+V "" N I!303 O!301 T!77 .1 0x1 
+F "getMeterKitID" F I!304 T!77 ?30-10 P!305 P!306 
+V "" N I!305 O!304 T!101 .2 0x2 
+V "" N I!306 O!304 T!77 .1 0x1 
+F "moveback" F I!307 T!2 ?32-10 
+F "copyDPfromFlash2Ram" F I!308 T!2 ?33-10 P!309 
+V "" N I!309 O!308 T!77 .1 0x1 
+F "getConfiguredDP" F I!310 T!2 ?34-10 P!311 
+V "" N I!311 O!310 T!77 .1 0x1 
+F "configDisplayPara" F I!312 T!77 ?35-10 P!313 
+V "" N I!313 O!312 T!96 .2 0x2 
+F "readConfiguredDP2Send" F I!314 T!77 ?36-10 P!315 P!316 
+V "" N I!315 O!314 T!101 .2 0x2 
+V "" N I!316 O!314 T!77 .1 0x1 
+F "ResetConfigDP" F I!317 T!2 ?37-10 
+F "validatelcdRAMBuff" F I!318 T!2 ?38-10 
+F "Compute_MD" F I!319 T!2 ?5-11 P!320 
+V "" N I!320 O!319 T!77 .1 0x1 
+F "GetMdLoc" F I!321 T!80 ?6-11 P!322 
+V "" N I!322 O!321 T!77 .1 0x1 
+F "doManBillDue2SeasonChange" F I!323 T!77 ?7-11 
+F "ConvertTimeCounterToTime" F I!324 T!83 ?10-12 41-1 P!325 P!326 P!327 
+V "" N I!325 O!324 T!83 .2 0x4 
+V "" N I!326 O!324 T!77 .1 0x1 
+V "" N I!327 O!324 T!328 .2 0x2 
+T "" KP I!328 T!281 0x2 
+F "ConvertTimeToTimeCounter" F I!329 T!83 ?11-12 50-1 61-1 P!330 
+V "" N I!330 O!329 T!328 .2 0x2 
+F "Crc_Cal" F I!331 T!80 ?12-12 P!332 P!333 
+V "" N I!332 O!331 T!96 .2 0x2 
+V "" N I!333 O!331 T!77 .1 0x1 
+F "Crc_Cal_Advanced" F I!334 T!80 ?13-12 P!335 P!336 P!337 
+V "" N I!335 O!334 T!96 .2 0x2 
+V "" N I!336 O!334 T!77 .1 0x1 
+V "" N I!337 O!334 T!80 .2 0x2 
+F "makeByte" F I!338 T!2 ?14-12 P!339 P!340 P!341 
+V "" N I!339 O!338 T!83 .2 0x4 
+V "" N I!340 O!338 T!77 .1 0x1 
+V "" N I!341 O!338 T!77 .1 0x1 
+F "getByteValue" F I!342 T!83 ?15-12 P!343 P!344 P!345 
+V "" N I!343 O!342 T!96 .2 0x2 
+V "" N I!344 O!342 T!77 .1 0x1 
+V "" N I!345 O!342 T!77 .1 0x1 
+F "SaveEEPROM" F I!346 T!2 ?16-12 P!347 P!348 
+V "" N I!347 O!346 T!77 .1 0x1 
+V "" N I!348 O!346 T!77 .1 0x1 
+F "powerfailLogging" F I!349 T!2 ?17-12 
+F "isRAMOK" F I!350 T!2 ?18-12 
+F "updateMDInterval" F I!351 T!80 ?19-12 P!352 P!353 
+V "" N I!352 O!351 T!77 .1 0x1 
+V "" N I!353 O!351 T!80 .2 0x2 
+F "isPowerfailLog" F I!354 T!77 ?20-12 P!355 
+V "" N I!355 O!354 T!77 .1 0x1 
+F "getSetPfailData" F I!356 T!77 ?21-12 P!357 
+V "" N I!357 O!356 T!77 .1 0x1 
+F "fillComBufferZero" F I!358 T!2 ?22-12 
+F "getSelftDgFeature" F I!359 T!77 ?23-12 
+F "Dec_Ascii" F I!360 T!2 ?24-12 P!361 P!362 P!363 P!364 
+V "" N I!361 O!360 T!83 .2 0x4 
+V "" N I!362 O!360 T!77 .1 0x1 
+V "" N I!363 O!360 T!101 .2 0x2 
+V "" N I!364 O!360 T!77 .1 0x1 
+F "getCustomDateTimeASCIIFormat" F I!365 T!77 ?25-12 P!366 P!367 P!368 
+V "" N I!366 O!365 T!83 .2 0x4 
+V "" N I!367 O!365 T!101 .2 0x2 
+V "" N I!368 O!365 T!77 .1 0x1 
+F "CheckBillingOver" F I!369 T!2 ?5-13 P!370 P!371 
+V "" N I!370 O!369 T!77 .1 0x1 
+V "" N I!371 O!369 T!83 .2 0x4 
+F "GetBillLoc" F I!372 T!80 ?6-13 P!373 
+V "" N I!373 O!372 T!77 .1 0x1 
+F "GetLastBillLoc" F I!374 T!80 ?7-13 P!375 
+V "" N I!375 O!374 T!77 .1 0x1 
+F "ClearMD" F I!376 T!2 ?8-13 
+F "doBilling" F I!377 T!2 ?9-13 
+F "getLastBillnumber" F I!378 T!77 ?10-13 
+F "getAvgPf" F I!379 T!77 ?11-13 
+F "initPowerOnDuration" F I!380 T!2 ?12-13 
+F "getNextBillingDate" F I!381 T!83 ?13-13 
+F "GetPastMD" F I!382 T!83 ?14-13 P!383 P!384 
+V "" N I!383 O!382 T!77 .1 0x1 
+V "" N I!384 O!382 T!77 .1 0x1 
+F "getAutoBillDay" F I!385 T!77 ?15-13 44-1 54-1 
+F "getlatestkWh_History" F I!386 T!2 ?16-13 
+V "i" N I!387 O!107 T!77 !18-1 #24-1 #24-1 24-1 24-1 26-1 27-1 28-1 29-1 .1 0x1 
+V "billloc" N I!388 O!107 T!80 !19-1 #21-1 22-1 .2 0x2 
+V "timeZoneCounter" N I!390 O!119 T!83 !34-1 66-1 69-1 .2 0x4 
+V "newseason" N I!391 O!119 T!77 !36-1 #36-1 #65-1 #75-1 #77-1 43-1 45-1 52-1 55-1 67-1 70-1 77-1 79-1 .1 0x1 
+V "seasonStartTime1" N I!392 O!119 T!83 !37-1 #37-1 #50-1 66-1 .2 0x4 
+V "seasonStartTime2" N I!393 O!119 T!83 !38-1 #38-1 #61-1 69-1 .2 0x4 
+V "rtc" N I!394 O!119 T!281 !39-1 #44-1 #45-1 #46-1 #47-1 #48-1 #54-1 #55-1 #57-1 #58-1 #59-1 41-1 50-1 61-1 .1 0x8 
+F "isZoneChanged" F I!395 T!77 #83-1 !84,91-1-1 P!397 
+V "timeZoneCounter" N I!397 O!395 T!83 !83-1 86-1 .2 0x4 
+V "newZoneId" N I!398 O!395 T!77 !85-1 #86-1 87-1 .1 0x1 
+V "timeZoneCounter" N I!400 O!108 T!83 !92-1 98-1 .2 0x4 
+V "EEPROMZoneTime" N I!401 O!108 T!402 !94-1 100-1 106-1 107-1 .2 0x10 
+T "" KA8 I!402 T!80 0x10 
+V "ZoneTime" N I!403 O!108 T!404 !95-1 #102-1 #103-1 #106-1 #107-1 #110-1 #111-1 #112-1 108-1 108-1 110-1 114-1 114-1 114-1 114-1 .2 0x8 
+T "" KA4 I!404 T!80 0x8 
+V "dayCounter" N I!405 O!108 T!80 !95-1 #98-1 114-1 114-1 114-1 114-1 .2 0x2 
+V "ZoneNo" N I!406 O!108 T!77 !96-1 #104-1 #104-1 #122-1 104-1 104-1 106-1 107-1 118-1 118-1 120-1 120-1 122-1 123-1 .1 0x1 
+V "MaxZoneNo" N I!407 O!108 T!77 !96-1 #101-1 104-1 .1 0x1 
+V "eventno" N I!409 O!110 T!77 !127-1 137-1 .1 0x1 
+V "addr" N I!410 O!110 T!80 !130-1 #133-1 #135-1 #137-1 #138-1 #140-1 137-1 138-1 140-1 142-1 .2 0x2 
+V "seasonNO" N I!412 O!112 T!77 !145-1 148-1 .1 0x1 
+V "MaxZoneNo" N I!413 O!112 T!77 !147-1 #147-1 #151-1 148-1 150-1 153-1 .1 0x1 
+V "MaxSeasonNo" N I!414 O!121 T!77 !158-1 #158-1 #163-1 160-1 162-1 165-1 .1 0x1 
+V "zoneNo" N I!417 O!116 T!77 !168-1 173-1 175-1 177-1 .1 0x1 
+V "EnergyType" N I!418 O!116 T!77 !168-1 172-1 179-1 .1 0x1 
+V "curEnergy" N I!419 O!116 T!83 !170-1 #170-1 #173-1 #175-1 #180-1 #182-1 180-1 182-1 186-1 .2 0x4 
+V "eventno" N I!421 O!114 T!77 !189-1 193-1 .1 0x1 
+V "addr" N I!422 O!114 T!78 !191-1 #193-1 #195-1 #197-1 #198-1 194-1 195-1 197-1 198-1 199-1 .2 0x2 
 ****%CxSystemPath%\inc\builtin.h
 v2 
-:1722590125
+:1738240470
 #2
 ****rlDevice\Include\dI2c.h
 v2 
-:1722590125
+:1738240470
 #3
 ****rlDevice\include\dTypedef.h
 v2 
-:1722590125
+:1738240470
 #4
 ****rlApplication\Include\AppTod.h
 v2 
-:1722590125
+:1738240470
 #5
 ****rlApplication\Include\AppVariables.h
 v2 
-:1722590125
+:1738240470
 #6
 ****rlApplication\Include\AppMacros.h
 v2 
-:1722590125
+:1738240470
 #7
 ****rlApplication\Include\AppConfig.h
 v2 
-:1722590125
+:1738240470
 #8
 ****rlApplication\Include\AppEeprom.h
 v2 
-:1722590125
+:1738240470
 #9
 ****rlApplication\Include\AppLcd.h
 v2 
-:1722590125
+:1738240470
 #10
 ****rlApplication\Include\AppMD.h
 v2 
-:1722590125
+:1738240470
 #11
 ****rlApplication\Include\AppMisc.h
 v2 
-:1722590125
+:1738240470
 #12
 ****rlApplication\Include\AppBilling.h
 v2 
-:1722590125
+:1738240470
 #13

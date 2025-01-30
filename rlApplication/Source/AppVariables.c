@@ -152,8 +152,8 @@ struct
 {
 	uint16_t 	TamperCount[MAX_TAMPER_COUNT];
 	uint8_t  	eventcounts[MAX_TAMPER_COUNT];
-	uint8_t		freebyte;
-	uint16_t	freebyte2;
+	uint8_t		bill_tamper_status;
+	uint8_t		Tamper_Once;
 	uint16_t 	sw_log_count;
 	uint16_t  	TamperStatusFlag	;
 	uint16_t 	lastEventAddr[MAX_TAMPER_COUNT];

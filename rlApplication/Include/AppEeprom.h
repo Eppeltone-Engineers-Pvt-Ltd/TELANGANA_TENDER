@@ -68,7 +68,7 @@
 #define TAMPER_U_RELATED_LOC	12352
 #endif
 #if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 1))
-#define TAMPER_EARTH_LOC		5312
+/*#define TAMPER_EARTH_LOC		5312
 #define TAMPER_CO_LOC			6080
 #define TAMPER_LU_LOC			6848
 #define TAMPER_OL_LOC			7616
@@ -76,6 +76,16 @@
 #define TAMPER_NM_LOC			9152	
 #define TAMPER_MAG_LOC			9920
 #define TAMPER_REV_LOC			10688
+#define TAMPER_ND_LOC			11456*/
+
+#define TAMPER_NM_LOC			5312
+#define TAMPER_REV_LOC			6080
+#define TAMPER_EARTH_LOC		6848
+#define TAMPER_CO_LOC			7616
+#define TAMPER_MAG_LOC			8384
+#define TAMPER_LU_LOC			9152
+#define TAMPER_OL_LOC			9920
+#define TAMPER_OU_LOC			10688
 #define TAMPER_ND_LOC			11456
 
 #endif
@@ -92,6 +102,8 @@
 #define DAILY_KWH_LOC           12864   //(12*90=1088)bytes
 #define POWER_FAIL_LOC          13952   //(100*8)=832
 #define LOAD_SURVEY_LOC         14784   //(292*60) = 17520
+#define MAGNET_PERMANENT_SAVE   32306
+#define TAMPER_STATUS_TEMP      32310
 #define METER_KIT_ID            32512     //16 Bytes
 
 #define EEP_START_LOC           0	//INTERVAL_KWH_LOC

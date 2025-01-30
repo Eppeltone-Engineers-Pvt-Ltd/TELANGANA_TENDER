@@ -119,7 +119,7 @@
 
 
 //CurrentTamperStatusFlag
-#define TAMPER_NEU_MISS     0x0001
+/*#define TAMPER_NEU_MISS     0x0001
 #define TAMPER_OVER_LOAD    0x0002
 #define TAMPER_MAG          0x0004
 #define TAMPER_REV          0x0008
@@ -127,7 +127,18 @@
 #define TAMPER_EARTH        0x0020
 #define TAMPER_OU         	0x0040
 #define TAMPER_COVEROPEN    0x0080
+#define TAMPER_LOW_U    	0x0100*/
+
+#define TAMPER_NEU_MISS     0x0001
+#define TAMPER_REV          0x0002
+#define TAMPER_EARTH        0x0004
+#define TAMPER_COVEROPEN    0x0008
+#define TAMPER_MAG          0x0010
+#define TAMPER_OVER_LOAD    0x0020
+#define TAMPER_AC_DC        0x0040
+#define TAMPER_OU         	0x0080
 #define TAMPER_LOW_U    	0x0100
+
 //------------------------------------
 
 
@@ -186,8 +197,8 @@
 #define MAG_DC_DETECT_TIME 30
 #endif
 #if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 1)&& (IRDA_TYPE_METER_AP == 1))
-#define PERMANENT_MAG_HOLD_TIME	30
-#define MAG_HOLD_TIME	30
+#define PERMANENT_MAG_HOLD_TIME	15
+#define MAG_HOLD_TIME	15
 #define MAG_DC_DETECT_TIME 30
 #endif
 

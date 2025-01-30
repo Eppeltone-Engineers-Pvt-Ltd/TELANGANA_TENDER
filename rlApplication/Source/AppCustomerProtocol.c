@@ -81,6 +81,8 @@ void Read_Command(uint8_t commandId )
     uint32_t temp;
 	uint16_t loc;
 	Apprtc rtc;
+	uint16_t data_position;
+//	uint8_t buff_t[2];
 	
     switch(commandId)
     {   
@@ -208,7 +210,7 @@ void Read_Command(uint8_t commandId )
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         case PROTO_READ_SERIAL_NO:
-			setComFrameBytes(10);
+						setComFrameBytes(10);
             getMeterSerial((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],SR_TYPE_ASCII);
             
             
@@ -228,17 +230,34 @@ void Read_Command(uint8_t commandId )
         break;
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
-        case PROTO_READ_TSTATUS_HISTORY:
-			setComFrameBytes(11);
+      /*  case PROTO_READ_TSTATUS_HISTORY:
+			setComFrameBytes(17);
             for(i=0;i<6;i++)
             {
               read_eeprom((uint8_t *)&Data.long_data,GetBillLoc(i)+39,2);
-              Dec_Ascii(Data.Short.lsb,3,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*4],0);
+              Dec_Ascii(Data.Short.lsb,3,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*3],0);
               if(i<5)
-                RxTxBuffer[PROTO_DATA_BYTES+i*4+3]=RECORD_SEPERATOR;
+                RxTxBuffer[PROTO_DATA_BYTES+i*3+2]=RECORD_SEPERATOR;
             }
+	break;
+	 for(i=0;i<6;i++)
+            {
+              read_eeprom((uint8_t *)&Data.long_data,GetBillLoc(i)+30,1);
+              Dec_Ascii(Data.byte[0],2,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*3],0);
+              if(i<5)
+                RxTxBuffer[PROTO_DATA_BYTES+i*3+2]=RECORD_SEPERATOR;
+            }*/
               
-            
+	   case PROTO_READ_TSTATUS_HISTORY:
+            setComFrameBytes(17);
+            for(i=0;i<6;i++)
+            {
+              read_eeprom((uint8_t *)&Data.long_data,GetBillLoc(i)+39,1);
+							
+              Dec_Ascii(Data.byte[0],2,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*3],0);
+              if(i<5)
+                RxTxBuffer[PROTO_DATA_BYTES+i*3+2]=RECORD_SEPERATOR;
+            }
         break;
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
@@ -276,21 +295,111 @@ void Read_Command(uint8_t commandId )
         break;
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
-        case PROTO_READ_LATEST_NM_TAMPER   :
-		case PROTO_READ_LATEST_OL_TAMPER   :
-		case PROTO_READ_LATEST_MAG_TAMPER  :
-		case PROTO_READ_LATEST_REV_TAMPER  :
-		case PROTO_READ_LATEST_ND_TAMPER   :
-		case PROTO_READ_LATEST_EARTH_TAMPER:
-		case PROTO_READ_LATEST_OV_TAMPER   :
-		case PROTO_READ_LATEST_CO_TAMPER   :
-		case PROTO_READ_LATEST_LU_TAMPER   :
-				setComFrameBytes(43);
-				getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],commandId-PROTO_READ_LATEST_NM_TAMPER,RxTxBuffer[PROTO_DATA_BYTES]);
+				case PROTO_READ_LATEST_NM_TAMPER   :
+							setComFrameBytes(59);	
+						 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],0,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				case PROTO_READ_LATEST_REV_TAMPER   :	
+							setComFrameBytes(59);	
+						 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],1,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				case PROTO_READ_LATEST_EARTH_TAMPER  :
+							setComFrameBytes(59);	
+						 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],2,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				case PROTO_READ_LATEST_CO_TAMPER  :
+							setComFrameBytes(59);	
+						 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],3,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				case PROTO_READ_LATEST_MAG_TAMPER   :
+							setComFrameBytes(59);	
+						 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],4,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				
+							
+				// Tamper All			
+				
+				case PROTO_READ_LATEST_NM_TAMPER_FIVE   :
+							setComFrameBytes(79);	
+				 			getCustomTamperData_occures((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],0,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+				
+				case PROTO_READ_LATEST_REV_TAMPER_FIVE   :
+							setComFrameBytes(79);	
+				 			getCustomTamperData_occures((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],1,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+							
+				case PROTO_READ_LATEST_EARTH_TAMPER_FIVE  :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_occures((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],2,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+							
+				case PROTO_READ_LATEST_CO_TAMPER_FIVE   :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_occures((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],3,RxTxBuffer[PROTO_DATA_BYTES]);
+							break;
+							
+				case PROTO_READ_LATEST_MAG_TAMPER_FIRST_FIVE  :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_only20mag((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],4,0);
+							break;
+				
+				case PROTO_READ_LATEST_MAG_TAMPER_SEC_FIVE    :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_only20mag((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],4,5);
+							break;
+				
+				case PROTO_READ_LATEST_MAG_TAMPER_THIRD_FIVE  :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_only20mag((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],4,10);
+							break;
+				
+				case PROTO_READ_LATEST_MAG_TAMPER_FOURTH_FIVE :
+							setComFrameBytes(79);	
+						 	getCustomTamperData_only20mag((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],4,15);
+							break;
+							
+//				case PROTO_READ_LATEST_ND_TAMPER	:
+//							setComFrameBytes(59);	
+//				 			getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],0,RxTxBuffer[PROTO_DATA_BYTES]);
+//							break;
 
-        break;
+			//	setComFrameBytes(59);	
+			// 	getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],commandId-PROTO_READ_LATEST_NM_TAMPER,RxTxBuffer[PROTO_DATA_BYTES]);
+			//  			if(i<4)
+	    //         RxTxBuffer[PROTO_DATA_BYTES+i*12+11]=RECORD_SEPERATOR;
+//				i = RxTxBuffer[PROTO_DATA_BYTES];
+			/*	data_position = 5;
+				for (i =0; i<5; i++)
+				{
+					loc = getCustomTamperData((uint8_t *)&RxTxBuffer[data_position], commandId-PROTO_READ_LATEST_NM_TAMPER , i);
+					data_position = data_position + loc;
+					
+					if(i<4)
+                RxTxBuffer[PROTO_DATA_BYTES+i*18+17]=RECORD_SEPERATOR;
+				}
+*/
+      //  break;
+    /*             RxTxBuffer[PROTO_NO_BYTES] =0x33;
+	            RxTxBuffer[PROTO_NO_BYTES+1] =0x42;
+
+	            for(i=0;i<5;i++)
+	            {
+	              read_eeprom((uint8_t *)&temp,GetTamperForwardLoc(i,commandId-0x47),4);
+	              Data.long_data=ConvertTimeCounterToTime(temp,DATE_VAL,&rtc);
+	              Dec_Ascii(Data.long_data,6,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*12],0);
+	              RxTxBuffer[PROTO_DATA_BYTES+i*12+6]=FIELD_SEPERATOR;
+	              
+	              Data.long_data=ConvertTimeCounterToTime(temp,TIME_VAL,&rtc);
+	              Dec_Ascii(Data.long_data/100,4,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*12+7],0);
+	              
+	              if(i<4)
+	                RxTxBuffer[PROTO_DATA_BYTES+i*12+11]=RECORD_SEPERATOR;
+	            }*/
+
+    //    break;
 		//----------------------------------------------------------------------
-		case PROTO_READ_LS_ENTRIES:
+	/*	case PROTO_READ_LS_ENTRIES:
 				setComFrameBytes(4);
 				ls_entries_requested=getLsEntries();
 				Dec_Ascii(ls_entries_requested,4,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],0);
@@ -363,6 +472,7 @@ void Read_Command(uint8_t commandId )
 				}		
 				setComFrameBytes(loc-1);
 		break;
+		*/
 		case PROTO_READ_SW_LOG:
 			loc=getCustomSWLog(&RxTxBuffer[PROTO_DATA_BYTES]);
 			setComFrameBytes(loc);
@@ -382,6 +492,24 @@ void Read_Command(uint8_t commandId )
 			}
 			#endif
 		break;
+		
+		/*	case PROTO_READ_TWENTTY_MAG_TAMPER:
+	           	setComFrameBytes(239);
+	            for(i=0;i<20;i++)
+	            {
+	              read_eeprom((uint8_t *)&temp,GetTamperForwardLoc(i,commandId-0x67),4);
+	              Data.long_data=ConvertTimeCounterToTime(temp,DATE_VAL,&rtc);
+	              Dec_Ascii(Data.long_data,6,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*12],0);
+	              RxTxBuffer[PROTO_DATA_BYTES+i*12+6]=FIELD_SEPERATOR;
+	              
+	              Data.long_data=ConvertTimeCounterToTime(temp,TIME_VAL,&rtc);
+	              Dec_Ascii(Data.long_data/100,4,(uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES+i*12+7],0);
+	              
+	              if(i<19)
+	                RxTxBuffer[PROTO_DATA_BYTES+i*12+11]=RECORD_SEPERATOR;
+	            }
+						  break;*/
+			
        //------------ Incase invalid command ----------------------------------
         default:
             RxTxBuffer[PROTO_DATA_BYTES] = 0x01;
@@ -746,6 +874,134 @@ uint8_t getCustomTODZoneHistorydata(uint8_t* bptr,uint8_t zone_no,uint8_t histor
 	
 }
 
+//getCustomTamperData((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],commandId-PROTO_READ_LATEST_NM_TAMPER,RxTxBuffer[PROTO_DATA_BYTES]);
+
+//#if 0
+// this is the original function
+uint8_t getCustomTamperData(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno)
+{
+	uint8_t buff[TAMPER_DATA_LENGTH];// currently 25
+	Apprtc rtc;
+	int i;
+	uint8_t loc_temp=0;
+
+	for(i =0; i<5; i++)
+	{
+	uint16_t loc=GetTamperForwardLoc(i,TamperNo);
+	read_eeprom(buff,loc,TAMPER_DATA_LENGTH);
+	
+	loc=0;
+	//Tamper Date
+    Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),DATE_VAL,&rtc);
+    Dec_Ascii(Data.long_data,6,bptr+loc_temp,0);
+	  loc+=6; // 36 , now 6
+		loc_temp+=6;
+	  bptr[loc_temp]=FIELD_SEPERATOR;
+	  loc+=1;	// 37	, now 7
+		loc_temp+=1;
+	//Tamper Time
+  	Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),TIME_VAL,&rtc);
+    Dec_Ascii(Data.long_data/100,4,bptr+loc_temp,0);
+	  loc+=4;	// now 13
+		loc_temp+=4;
+		bptr[loc_temp]=RECORD_SEPERATOR;
+		loc+=1;
+		loc_temp+=1;
+	//43
+	}
+	return loc_temp;
+}
+//#endif
+
+uint8_t getCustomTamperData_occures(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno)
+{
+	uint8_t buff[TAMPER_DATA_LENGTH];// currently 25
+	Apprtc rtc;
+	int i;
+	uint8_t loc_temp=0;
+
+	for(i =0; i<5; i++)
+	{
+	uint16_t loc=GetTamperForwardLoc(i,TamperNo);
+	read_eeprom(buff,loc,TAMPER_DATA_LENGTH);
+	
+	  loc=0;
+	//Tamper Date
+    Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),DATE_VAL,&rtc);
+    Dec_Ascii(Data.long_data,6,bptr+loc_temp,0);
+	  loc+=6; // 36 , now 6
+		loc_temp+=6; //6
+	  bptr[loc_temp]=FIELD_SEPERATOR;
+	  loc+=1;	// 37	, now 7
+		loc_temp+=1; //7
+	//Tamper Time
+  	Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),TIME_VAL,&rtc);
+    Dec_Ascii(Data.long_data/100,4,bptr+loc_temp,0);
+	  loc+=4;	
+		loc_temp+=4; //11
+		bptr[loc_temp]=FIELD_SEPERATOR;
+	  loc+=1;	
+		loc_temp+=1; //12
+	// Event type	
+		Dec_Ascii(getByteValue(buff,4,2),3,bptr+loc_temp,0);
+	  loc+=3;
+		loc_temp+=3; //15
+		bptr[loc_temp]=RECORD_SEPERATOR;
+		loc+=1;
+		loc_temp+=1; //16
+
+	}
+	return loc_temp;
+}
+
+uint8_t getCustomTamperData_only20mag(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno)
+{
+	uint8_t buff[TAMPER_DATA_LENGTH];// currently 25
+	Apprtc rtc;
+	int i;
+	uint8_t loc_temp=0;
+	uint8_t length=5;
+	if(eventno==5)length=10;
+	if(eventno==10)length=15;
+	if(eventno==15)length=20;
+
+	for(i =eventno; i<length; i++)
+	{
+	uint16_t loc=GetTamperForwardLoc(i,TamperNo);
+	read_eeprom(buff,loc,TAMPER_DATA_LENGTH);
+	
+	  loc=0;
+	//Tamper Date
+    Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),DATE_VAL,&rtc);
+    Dec_Ascii(Data.long_data,6,bptr+loc_temp,0);
+	  loc+=6; // 36 , now 6
+		loc_temp+=6; //6
+	  bptr[loc_temp]=FIELD_SEPERATOR;
+	  loc+=1;	// 37	, now 7
+		loc_temp+=1; //7
+	//Tamper Time
+  	Data.long_data=ConvertTimeCounterToTime(getByteValue(buff,0,4),TIME_VAL,&rtc);
+    Dec_Ascii(Data.long_data/100,4,bptr+loc_temp,0);
+	  loc+=4;	
+		loc_temp+=4; //11
+		bptr[loc_temp]=FIELD_SEPERATOR;
+	  loc+=1;	
+		loc_temp+=1; //12
+	// Event type	
+		Dec_Ascii(getByteValue(buff,4,2),3,bptr+loc_temp,0);
+	  loc+=3;
+		loc_temp+=3; //15
+		bptr[loc_temp]=RECORD_SEPERATOR;
+		loc+=1;
+		loc_temp+=1; //16
+
+	}
+	return loc_temp;
+}
+
+
+#if 0
+// this is the original function
 uint8_t getCustomTamperData(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno)
 {
 
@@ -801,6 +1057,9 @@ uint8_t getCustomTamperData(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno)
 	
 	
 }
+
+#endif
+
 
 uint8_t getFormatData(uint8_t *bptr)
 {

@@ -33,7 +33,7 @@
 
 
 //--------------Event Code for DLMS-----------------
-const uint8_t dlmsEventCode[MAX_TAMPER_COUNT][2]={
+/*const uint8_t dlmsEventCode[MAX_TAMPER_COUNT][2]={
 {207	,208},		// NM
 {67	,68},		// OL
 {201	,202},		// MAG
@@ -42,6 +42,18 @@ const uint8_t dlmsEventCode[MAX_TAMPER_COUNT][2]={
 {69	,70},		// EARTH
 {7	,8},		// OU
 {251	,0xFF},		// C-oPEN
+{9	,10},		// Low U
+};*/
+
+const uint8_t dlmsEventCode[MAX_TAMPER_COUNT][2]={
+{207	,208},		// NM
+{51	,52},		// REV
+{69	,70},		// EARTH
+{251	,0xFF},		// C-oPEN
+{201	,202},		// MAG
+{67	,68},		// OL
+{203	,204},		// ND
+{7	,8},		// OU
 {9	,10},		// Low U
 };
 
@@ -92,7 +104,7 @@ const uint8_t EventCountIndex[MAX_TAMPER_COUNT]={
 8
 };
 
-const uint8_t EventLen[MAX_TAMPER_COUNT]={
+/*const uint8_t EventLen[MAX_TAMPER_COUNT]={
   30,								
   30,								
   30,								
@@ -102,9 +114,21 @@ const uint8_t EventLen[MAX_TAMPER_COUNT]={
   30,
   30,
   1
+};*/
+
+const uint8_t EventLen[MAX_TAMPER_COUNT]={
+  10,								
+  10,								
+  10,								
+  10,
+  20,
+  10,
+  10,
+  10,
+  1,
 };
 
-const uint16_t startAdd[MAX_TAMPER_COUNT]={
+/*const uint16_t startAdd[MAX_TAMPER_COUNT]={
   TAMPER_NM_LOC,
   TAMPER_OL_LOC,
   TAMPER_MAG_LOC,
@@ -114,20 +138,30 @@ const uint16_t startAdd[MAX_TAMPER_COUNT]={
   TAMPER_OU_LOC,
   TAMPER_CO_LOC,
   TAMPER_LU_LOC,
+};*/
+
+const uint16_t startAdd[MAX_TAMPER_COUNT]={
+  TAMPER_NM_LOC,
+  TAMPER_REV_LOC,
+  TAMPER_EARTH_LOC,
+  TAMPER_CO_LOC,
+  TAMPER_MAG_LOC,
+  TAMPER_OL_LOC,
+  TAMPER_ND_LOC,
+  TAMPER_OU_LOC,
+  TAMPER_LU_LOC,
 };
 #endif
 
+uint8_t mag_permanent_save=0;
 uint8_t Check_Tamper(void)
 {   
 	
 	uint8_t status=0;
 	uint8_t checkOffset=0;
    
-	display_flag=0;
+	display_flag=0;  // 0000 0010
 	CurrentTamperStatusFlag=0;
-		
-
-	
 	if((TamperRecord.TamperStatusFlag & TAMPER_COVEROPEN)==0)// if cover open is not there
 	{
 		while(GET_COVER_STATUS)	// check cover open pin 
@@ -141,7 +175,6 @@ uint8_t Check_Tamper(void)
 	}
 	else
 		CurrentTamperStatusFlag |= TAMPER_COVEROPEN;
-	
 	if(Ins.Voltage>COM_THRESHOLD_VOLTAGE)
 	{
 		if(GET_COM_STATUS==0)
@@ -252,7 +285,7 @@ uint8_t Check_Tamper(void)
 					}
 				}
 			#endif
-			if(Ins.Frequency<4500||Ins.Frequency>5500)
+			if(Ins.Frequency<4700||Ins.Frequency>5300)
 			{
 				CurrentTamperStatusFlag |= TAMPER_AC_DC;
 			}
@@ -348,6 +381,8 @@ uint8_t Check_Tamper(void)
 				if(cum_mag_toggle_count>3)
 				{
 					CurrentTamperStatusFlag|=TAMPER_MAG;
+					mag_permanent_save=1;
+		//			TamperRecord.tamper_once|=TAMPER_MAG;
 					if(TamperTime_counter[2]<(MAG_HOLD_TIME*2))
 						TamperTime_counter[2]=(MAG_HOLD_TIME*2)+1;
 						
@@ -408,11 +443,15 @@ uint8_t Check_Tamper(void)
 	return status;
 }
 /*--------------------------------------------------------------------------*/
+uint8_t NM_save,Rev_save,earth_save,CO_save,Mag_save;
+uint8_t NM_save_res,Rev_save_res,earth_save_res,CO_save_res,Mag_save_res;
+uint8_t status_temp;
+
 
 void Tamperlog(void)
 {   
 	uint8_t i,save_flag=0;
-	uint16_t TamperType=1;
+	uint16_t TamperType=1;	// 0000 0000 0000 0001 0x0001
 #if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 0))	
 	uint16_t TAMPER_EVENT_OCC_TIME[MAX_TAMPER_COUNT]={60,60,60,60,60,60,60,60,60};
 	uint16_t TAMPER_EVENT_REC_TIME[MAX_TAMPER_COUNT]={60,60,56,60,60,60,60,60,60};	
@@ -422,30 +461,57 @@ void Tamperlog(void)
 	uint16_t TAMPER_EVENT_REC_TIME[MAX_TAMPER_COUNT]={60,60,26,60,60,60,60,60,60};	
 #endif
 #if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 1)&& (IRDA_TYPE_METER_AP == 1))	
-	uint16_t TAMPER_EVENT_OCC_TIME[MAX_TAMPER_COUNT]={60,60,60,60,60,60,60,60,60};
-	uint16_t TAMPER_EVENT_REC_TIME[MAX_TAMPER_COUNT]={60,60,56,60,60,60,60,60,60};	
+	uint16_t TAMPER_EVENT_OCC_TIME[MAX_TAMPER_COUNT]={60,60,60,10,60,60,60,60,60};
+	uint16_t TAMPER_EVENT_REC_TIME[MAX_TAMPER_COUNT]={60,60,60,10,56,60,60,60,60};	
 #endif
 
 	uint16_t loc=0;
 	uint8_t eventtype;
-     
+	uint8_t RxTxBuffer_temp[1];
+	uint8_t RxTxBuffer_tamper[1];
+	uint8_t save_temp_status=0;
+	
+	//read_eeprom(RxTxBuffer,MAGNET_PERMANENT_SAVE,1);
+	 read_eeprom((uint8_t *)&Data.long_data,MAGNET_PERMANENT_SAVE,1);
+	  
+		if((mag_permanent_save==1)||(Data.byte[0]==0x01))
+		{
+			RxTxBuffer_temp[0]=0x01;
+		  display_flag|=DISP_MAG;
+			//if(Data.byte[0]==0x01)
+		  write_eeprom(RxTxBuffer_temp,MAGNET_PERMANENT_SAVE,1);
+		}
+	
 	for(i=0;i<MAX_TAMPER_COUNT;i++)
 	{   
 
 		if(((TamperRecord.TamperStatusFlag & TamperType) ^ (CurrentTamperStatusFlag & TamperType))>0)
-		{   
+		{   //when tamper is occurring or restoring
 
 			TamperTime_counter[i]++;
-
 			eventtype = (TamperRecord.TamperStatusFlag ^ TamperType) & TamperType ?0:1;  // occurence or recovery
 
 			//-------------------------------------------------------------
 
 			if(((TamperTime_counter[i] >= TAMPER_EVENT_OCC_TIME[i])&&(eventtype==0))||((TamperTime_counter[i] >= TAMPER_EVENT_REC_TIME[i])&&(eventtype==1)))
-			{ 
-				if(TamperType==TAMPER_COVEROPEN)
+			{
+			//when any Tamper is occuring and variable crosses 60
+			// Tamper type contains the code of the tamper
+			
+				if(TamperType==TAMPER_COVEROPEN) //0x0008
 					setParaBuff(DISPLAY_MODE_AUTO_COVER);
 					
+// 		Remember bill_tamper_status and tamper once is 8 bit
+				if(eventtype==0) 
+				{ // event type is occurrence
+					TamperRecord.bill_tamper_status|=TamperType;
+					TamperRecord.Tamper_Once|=TamperType;
+				}
+				else
+				{ // event type is restoration
+					TamperRecord.bill_tamper_status&=~TamperType;
+				}
+				
 				SaveEEPROM(PARA_WRITE_BEFORE_STATE,PARA_TYPE_TAMPER );
 				save_flag=1;
 				mcu_flag&= ~COMM_RECEIVE_ENABLE; 
@@ -500,14 +566,12 @@ void Tamperlog(void)
 	{
 		R_OBIS_Class07_EventUpdate();
 		SaveEEPROM(PARA_WRITE_AFTER_STATE ,PARA_TYPE_TAMPER );
-		
 	}
 			
 }
 /*----------------------------------------------------------------------------*/
 
-
-
+ 
 /*----------------------------------------------------------------------------*/
 
 uint16_t getTotalTamperCount(void)

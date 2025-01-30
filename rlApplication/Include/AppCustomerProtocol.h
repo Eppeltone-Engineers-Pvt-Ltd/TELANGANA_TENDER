@@ -26,27 +26,42 @@
 #define PROTO_READ_TSTATUS_HISTORY        0x44
 #define PROTO_READ_KWH_CON_HISTORY        0x45
 #define PROTO_READ_MD_HISTORY             0x46
-#define PROTO_READ_LATEST_NM_TAMPER       0x47
-#define PROTO_READ_LATEST_OL_TAMPER       0x48
-#define PROTO_READ_LATEST_MAG_TAMPER      0x49
-#define PROTO_READ_LATEST_REV_TAMPER      0x4A
-#define PROTO_READ_LATEST_ND_TAMPER       0x4B
-#define PROTO_READ_LATEST_EARTH_TAMPER    0x4C
+#define PROTO_READ_LATEST_NM_TAMPER       0x47   
+#define PROTO_READ_LATEST_REV_TAMPER      0x48
+#define PROTO_READ_LATEST_EARTH_TAMPER    0x49
+#define PROTO_READ_LATEST_CO_TAMPER       0x4A
+#define PROTO_READ_LATEST_MAG_TAMPER      0x4B
+
+
+#define PROTO_READ_LATEST_NM_TAMPER_FIVE            0x5D
+#define PROTO_READ_LATEST_REV_TAMPER_FIVE           0x5E
+#define PROTO_READ_LATEST_EARTH_TAMPER_FIVE         0x5F
+#define PROTO_READ_LATEST_CO_TAMPER_FIVE            0x60
+#define PROTO_READ_LATEST_MAG_TAMPER_FIRST_FIVE     0x61
+#define PROTO_READ_LATEST_MAG_TAMPER_SEC_FIVE       0x62
+#define PROTO_READ_LATEST_MAG_TAMPER_THIRD_FIVE     0x63
+#define PROTO_READ_LATEST_MAG_TAMPER_FOURTH_FIVE    0x64
+//#define PROTO_READ_LATEST_ND_TAMPER                 0x65
+
+
+
+
+//#define PROTO_READ_LATEST_OL_TAMPER       0x48
+//#define PROTO_READ_LATEST_ND_TAMPER       0x4B
 #define PROTO_READ_LATEST_OV_TAMPER       0x4D
-#define PROTO_READ_LATEST_CO_TAMPER       0x4E
 #define PROTO_READ_LATEST_LU_TAMPER       0x4F
 
 
 #define PROTO_READ_CALIB_CONST            0x5A
 #define PROTO_READ_RTC_DATA               0x5C
-#define PROTO_READ_LS_DATA                0x5D
-#define PROTO_READ_DAILY_DATA             0x5E
-#define PROTO_READ_LS_ENTRIES             0x5F
-#define PROTO_READ_TOD04             	  0x60
-#define PROTO_READ_TOD58             	  0x61
-#define PROTO_ENERGY_HISTORY              0x62
-#define PROTO_TOD_HISTORY04               0x63
-#define PROTO_TOD_HISTORY58               0x64
+//#define PROTO_READ_LS_DATA                0x5D
+//#define PROTO_READ_DAILY_DATA             0x5E
+//#define PROTO_READ_LS_ENTRIES             0x5F
+//#define PROTO_READ_TOD04             	  0x60
+//#define PROTO_READ_TOD58             	  0x61
+//#define PROTO_ENERGY_HISTORY              0x62
+//#define PROTO_TOD_HISTORY04               0x63
+//#define PROTO_TOD_HISTORY58               0x64
 #define PROTO_READ_FORMAT_DATA            0x65
 #define PROTO_READ_SW_LOG            	  0x66
 
@@ -57,6 +72,8 @@ uint8_t getCustomTODZonedata(uint8_t* bptr,uint8_t zone_no);
 uint8_t getCustomHistorydata(uint8_t* bptr,uint8_t history_no);
 uint8_t getCustomTODZoneHistorydata(uint8_t* bptr,uint8_t zone_no,uint8_t history_no);
 uint8_t getCustomTamperData(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno);
+uint8_t getCustomTamperData_occures(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno);
+uint8_t getCustomTamperData_only20mag(uint8_t *bptr,uint8_t TamperNo,uint8_t eventno);
 uint8_t getFormatData(uint8_t *bptr);
 uint8_t getTamperCustomdata(uint8_t TamperNo,uint8_t * bptr);
 void setKNO(const uint8_t * bptr);

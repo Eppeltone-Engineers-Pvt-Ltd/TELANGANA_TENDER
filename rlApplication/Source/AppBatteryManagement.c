@@ -93,6 +93,7 @@ void updatePfailEvent(void);
 void updatePulse(void);
 void updateEnergyPulsePara(uint8_t ioption);
 extern uint8_t push_button_pressed_for_nm;
+extern uint8_t mag_permanent_save;
 
 void powerfail_op_without_NM(void)
 {
@@ -356,7 +357,8 @@ void powerfail_op_without_NM(void)
 						mcu_flag&=~ADC_LOAD_SECOND_STAGE;
 						mcu_flag&=~ADC_NO_LOAD_FIRST_STAGE;
 						#if(defined(IRDA_TYPE_METER_AP_WARNGL) && (IRDA_TYPE_METER_AP_WARNGL == 1))
-							setParaBuff(DISPLAY_MODE_PUSH);
+						//	setParaBuff(DISPLAY_MODE_PUSH);
+						setParaBuff(DISPLAY_MODE_NORMAL);
 						#else
 							setParaBuff(DISPLAY_MODE_UOUT_NORMAL);
 						#endif

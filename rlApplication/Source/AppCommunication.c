@@ -113,15 +113,15 @@ void Write_Command(uint8_t isCodeType)
 
 	if((RxTxBuffer[0]=='E')&&(RxTxBuffer[1]=='E')&&(RxTxBuffer[2]=='O')&&(RxTxBuffer[3]=='Z')&&(RxTxBuffer[4]=='A')&&((RxTxBuffer[5]=='P')||(RxTxBuffer[5]==0))&&(RxTxBuffer[6]==0x0D)&&(RxTxBuffer[7]==0x0A) )
 	{
-		if(isCodeType==PRODUCTION_CODE)
-		{
+	//	if(isCodeType==PRODUCTION_CODE)
+	//	{
 			if(RxTxBuffer[5]=='P')
 				ClearEEpromMemory(EEP_START_LOC);
 			else if(RxTxBuffer[5]==0)
 				ClearEEpromMemory(INTERVAL_KWH_LOC);
 			send_response=1;
 			isdoReset=1;
-		}
+	//	}
 
 	}
 	else if((RxTxBuffer[0]=='E')&&(RxTxBuffer[1]=='E')&&(RxTxBuffer[2]=='O')&&(RxTxBuffer[3]=='R')&&(RxTxBuffer[4]=='S')&&(RxTxBuffer[5]=='T')&&(RxTxBuffer[6]=='R')&&(RxTxBuffer[7]=='T')&&(RxTxBuffer[8]=='C')&&(RxTxBuffer[9]==0x0D)&&(RxTxBuffer[10]==0x0A) )
@@ -313,7 +313,7 @@ void Write_Command(uint8_t isCodeType)
 	}
 	else if((RxTxBuffer[0]=='E')&&(RxTxBuffer[1]=='E')&&(RxTxBuffer[2]=='O')&&(RxTxBuffer[3]=='B')&&(RxTxBuffer[4]=='T')&&(RxTxBuffer[5]==0)&&(RxTxBuffer[6]==0)&&(RxTxBuffer[7]==0x0D)&&(RxTxBuffer[8]==0x0A) )
 	{
-		#if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 0))
+		#if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP == 1))
 		DI();
 		((void (*) (void)) 0x200e) ();
 		#endif
