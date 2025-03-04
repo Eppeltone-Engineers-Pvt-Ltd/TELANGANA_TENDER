@@ -170,7 +170,7 @@ const uint8_t txtmsg[][8]={
 {CHR_E	,CHR_E	,CHR_P	,CHR_L	,CHR_0	,CHR_1	,NONE	,NONE	},	//6-EEPL01
 #if (defined(PCB_VER_4_6_8) && (PCB_VER_4_6_8 == 1))
 #if (defined(IRDA_TYPE_METER_HP) && (IRDA_TYPE_METER_HP==1))	
-{CHR_r	,CHR_L	,CHR_4	,CHR_6	,CHR_8	,CHR_0	,CHR_1	,CHR_0 	},	//7-FORMAT 4.68.010
+{CHR_r	,CHR_L	,CHR_4	,CHR_6	,CHR_8	,CHR_0	,CHR_1	,CHR_1 	},	//7-FORMAT 4.68.011
 #else
 {CHR_r	,CHR_L	,CHR_4	,CHR_6	,CHR_8	,CHR_5	,CHR_3	,CHR_1 	},	//7-FORMAT 4.68.531
 #endif

@@ -210,7 +210,7 @@ void Read_Command(uint8_t commandId )
         //----------------------------------------------------------------------
         //----------------------------------------------------------------------
         case PROTO_READ_SERIAL_NO:
-						setComFrameBytes(10);
+			setComFrameBytes(8);
             getMeterSerial((uint8_t *)&RxTxBuffer[PROTO_DATA_BYTES],SR_TYPE_ASCII);
             
             

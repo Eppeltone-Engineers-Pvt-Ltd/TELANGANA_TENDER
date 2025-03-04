@@ -1,7 +1,7 @@
 ;0 is for 4.6.6,4.6.8
 ; 1 is for 4.6.2
 ; 2 is for 4.6.8 Irda
-__MYBOOT_CUST	.EQU	0
+__MYBOOT_CUST	.EQU	2
 .SECTION BOOT_VTABLE,	TEXT
 BOOT_VTABLE .CSEG		TEXT
 .ORG	0x1000
